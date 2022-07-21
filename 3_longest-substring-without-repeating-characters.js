@@ -16,7 +16,6 @@ var lengthOfLongestSubstring = function(s) {
         } else {
             substring += char
             if (substring.length > maxVal) maxVal = substring.length
-            console.log(substring)
         }
     }
     return maxVal
