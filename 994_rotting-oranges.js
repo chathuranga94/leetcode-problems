@@ -72,9 +72,80 @@ var orangesRotting = function(grid) {
     return time
 };
 
+var orangesRotting2 = function(grid) {
+    let rotten = []
+    // let fresh = []
+    let freshOranges = {}
+
+    for(let i=0; i < grid.length; i++) {
+        for (let j=0; j < grid[i].length; j++) {
+            const orange = grid[i][j]
+            if (orange === 2) {
+                rotten.push(`${i}_${j}`)
+            }
+            if (orange === 1) {
+                // fresh.push(`${i}_${j}`)
+                freshOranges[`${i}_${j}`] = true
+            }
+        }
+    }
+    let time = 0
+    // while (rotten.length > 0 && fresh.length > 0) {
+    while (rotten.length > 0 && Object.values(freshOranges).length > 0) {
+        let newRotten = []
+        let newRottenIdx = []
+
+        for(let i=0; i < rotten.length; i++) {
+            if (i === 0) {
+                newRotten = []
+                newRottenIdx = []
+            }
+
+            const rotten_place = rotten[i].split("_")
+            const x = parseInt(rotten_place[0])
+            const y = parseInt(rotten_place[1])
+
+            const adjacent_places = [`${x-1}_${y}`, `${x+1}_${y}`, `${x}_${y-1}`, `${x}_${y+1}`]
+
+            // fresh.map((a, idx) => {
+            //     if (adjacent_places.includes(a)) {
+            //         newRottenIdx.push(idx)
+            //         if ( !newRotten.includes(a)) {
+            //             newRotten.push(a)
+            //         }
+            //     }
+            // })
+
+            adjacent_places.forEach(adjacent => {
+                if (freshOranges[adjacent]) {
+                    newRottenIdx.push(adjacent)
+                    if ( !newRotten.includes(adjacent)) {
+                        newRotten.push(adjacent)
+                    }
+                }
+            })
+        }
+
+        rotten = [...newRotten]
+        newRottenIdx.forEach((key) => {
+            delete freshOranges[key]
+        })
+        // fresh = fresh.filter((val, idx) => newRottenIdx.indexOf(idx) === -1)
+
+        time++
+    }
+
+    // if (fresh.length > 0) {
+    if (Object.entries(freshOranges).length > 0) {
+        return -1
+    }
+
+    return time
+};
+
 
 console.log(
-    // orangesRotting([[2,1,1],[1,1,0],[0,1,1]])
-    // orangesRotting([0,2])
-    orangesRotting([[2,1,1],[0,1,1],[1,0,1]])
+    // orangesRotting2([[2,1,1],[1,1,0],[0,1,1]])
+    // orangesRotting2([0,2])
+    orangesRotting2([[2,1,1],[0,1,1],[1,0,1]])
 )
