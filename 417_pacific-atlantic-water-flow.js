@@ -98,11 +98,3 @@ console.log(
         ]
     )
 )
-
-
-/*
-https://spankbang.com/6zyne/video/you+might+as+well+get+me+pregnant
-https://spankbang.com/70pij/video/mia+of
-https://spankbang.com/70q8s/video/new+stepmom+chore+rewards
-https://spankbang.com/6yzno/video/adara+love+venezolana+culona+peru
-*/
